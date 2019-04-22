@@ -9,7 +9,8 @@ class DriverController extends Controller
 {
     public function index()
     {
-        return response()->view('drivers');
+        $drivers = Driver::all();
+        return response()->view('drivers', ['items' => $drivers]);
     }
 
     public function save(Request $request)
