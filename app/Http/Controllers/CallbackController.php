@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Callback;
+use App\Mail\CallbackMail;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Mail;
@@ -33,6 +34,6 @@ class CallbackController extends Controller
         $mail = new Mailable();
 
         // send email
-        Mail::to("korman.yuri@gmail.com")->send($mail);
+        Mail::to("korman.yuri@gmail.com")->send(new CallbackMail());
     }
 }
