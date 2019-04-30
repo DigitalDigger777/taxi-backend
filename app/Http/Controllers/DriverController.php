@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Driver;
+use App\Mail\DriverMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class DriverController extends Controller
 {
@@ -24,5 +26,7 @@ class DriverController extends Controller
         $driver->email = $request->get('email');
 
         $driver->save();
+
+        Mail::to("korman.yuri@gmail.com")->send(new DriverMail($driver));
     }
 }
