@@ -34,6 +34,6 @@ class CallbackController extends Controller
         $mail = new Mailable();
 
         // send email
-        Mail::to("korman.yuri@gmail.com")->send(new CallbackMail());
+        Mail::to("korman.yuri@gmail.com")->send(new CallbackMail($callback));
     }
 }
