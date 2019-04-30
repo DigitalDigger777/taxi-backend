@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Callback;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -12,13 +13,17 @@ class CallbackMail extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * Create a new message instance.
-     *
-     * @return void
+     * @var Callback
      */
-    public function __construct()
+    private $callbackObj;
+
+    /**
+     * CallbackMail constructor.
+     * @param $callbackObject
+     */
+    public function __construct($callbackObject)
     {
-        //
+        $this->callbackObj = $callbackObject;
     }
 
     /**
@@ -30,6 +35,11 @@ class CallbackMail extends Mailable
     {
         return $this->from('k380991576192@gmail.com')
             ->view('mails.callback')
-            ->text('mails.callback_plain');
+            ->text('mails.callback_plain')
+            ->with([
+                'name' => $this->callbackObj->name,
+                'phone' => $this->callbackObj->phone,
+                'email' => $this->callbackObj->email
+            ]);
     }
 }
