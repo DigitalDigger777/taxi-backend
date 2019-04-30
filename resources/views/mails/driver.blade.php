@@ -13,7 +13,7 @@
     </tr>
     <tr>
         <td>City:</td>
-        <td>{{$name}}</td>
+        <td>{{$city}}</td>
     </tr>
     <tr>
         <td>Phone:</td>
