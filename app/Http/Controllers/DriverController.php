@@ -27,11 +27,16 @@ class DriverController extends Controller
 
         $driver->save();
 
-        if ($request->hasFile('file1')) {
-            $file = 'file1';
-            $request->file($file)->store('documents');
+        $files = [];
+        for ($i = 0; $i < 8; $i++) {
+            if ($request->hasFile('file' . $i)) {
+                $file = 'file' . $i;
+                $path = $request->file($file)->store('documents');
+                $files[] = $path;
+            }
         }
 
-        Mail::to("korman.yuri@gmail.com")->send(new DriverMail($driver));
+        Mail::to("korman.yuri@gmail.com")->send(new DriverMail($driver, $files));
+
     }
 }
