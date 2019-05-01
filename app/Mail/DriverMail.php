@@ -13,14 +13,17 @@ class DriverMail extends Mailable
 
     private $driver;
 
+    private $files;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($driver)
+    public function __construct($driver, $files)
     {
         $this->driver = $driver;
+        $this->files = $files;
     }
 
     /**
@@ -30,7 +33,7 @@ class DriverMail extends Mailable
      */
     public function build()
     {
-        return $this->from('k380991576192@gmail.com')
+        $mail = $this->from('k380991576192@gmail.com')
             ->view('mails.driver')
             ->text('mails.driver_plain')
             ->with([
@@ -41,5 +44,11 @@ class DriverMail extends Mailable
                 'phone' => $this->driver->phone,
                 'email' => $this->driver->email
             ]);
+
+        foreach ($this->files as $file) {
+            $mail->attachFromStorage($file);
+        }
+
+        return $mail;
     }
 }
