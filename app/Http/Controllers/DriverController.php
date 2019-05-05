@@ -36,7 +36,7 @@ class DriverController extends Controller
             }
         }
 
-        Mail::to("korman.yuri@gmail.com")->send(new DriverMail($driver, $files));
+        Mail::to(env('EMAIL_TO'))->send(new DriverMail($driver, $files));
 
     }
 }
